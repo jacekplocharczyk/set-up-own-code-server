@@ -9,6 +9,6 @@ RUN code-server --install-extension yzhang.markdown-all-in-one
 RUN code-server --install-extension zhuangtongfa.Material-theme 
 
 COPY ./settings.json /home/coder/.local/share/code-server/User
-# ENTRYPOINT ["dumb-init", "code-server", "--no-auth"]
+
 ENTRYPOINT ["dumb-init", "code-server", "--cert=/home/coder/vs_code_server.crt", \
 "--cert-key=/home/coder/vs_code_server.key", "--disable-telemetry", "--no-auth"]
