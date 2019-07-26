@@ -1,0 +1,19 @@
+// VS Code settings
+{
+    "editor.fontSize": 16,
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
+    "editor.formatOnSave": true,
+    "debug.console.fontSize": 16,
+    "files.autoSave": "afterDelay",
+    "update.enableWindowsBackgroundUpdates": false,
+    "update.showReleaseNotes": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "terminal.integrated.fontSize": 16,
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.iconTheme": "ayu",
+    "workbench.settings.editor": "json",
+    "workbench.settings.openDefaultSettings": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "window.zoomLevel": 0,
+}
