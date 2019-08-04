@@ -1,12 +1,14 @@
 # set-up-own-code-server
 My attempt to make my own Visual Stuido Code server.
+The main goal here is to use vs code to run `python` with `pipenv` over browser.
 
-## Create vs-code server with self-signed certificate
-In the root of the repository build docker image:  
-`docker build -t vscode-server:latest .`
+## Requirements
+**Note: If you don't want use default paths you can change them in the `docker-compose.yaml` file.**
 
-Start server with following command:  
-`docker run -it -p 127.0.0.1:8443:8443 -v "${PWD}:/home/coder/project" vscode-server`
+`docker-compose` requires two paths to set up `vs code` server:  
+1. `/home/<your_username>/projects` for persistent storage of the project files.  
+2. `/home/<you_username>/.local/share/virtualenvs` for persistnet storage of virtual envs.  
 
-Open browser and go to https://localhost:8443/.  
-You have to skip warnings regarding self-signed certificate and enter password from the shell output.
+## Start
+To start run:  
+`docker-compose up -d`

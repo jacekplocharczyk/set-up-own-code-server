@@ -1,0 +1,14 @@
+version: '2.1'
+volumes:
+  pipenv:
+    driver: local
+
+services:
+  vs-code:
+    image: jacekplocharczyk/vscode-server:latest
+    restart: always
+    ports:
+      - 8443:8443
+    volumes:
+      - /home/${USER}/projects/:/home/coder/project/
+      - pipenv:/home/coder/.local/share/virtualenvs/

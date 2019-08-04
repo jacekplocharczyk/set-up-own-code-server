@@ -1,14 +1,20 @@
 FROM codercom/code-server:latest
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout "/home/coder/vs_code_server.key" -out "/home/coder/vs_code_server.crt" \
-    -subj "/C=PL/ST=Mazowieckie/L=Warsaw/O=None/CN=localhost"
+USER root
+RUN apt-get update && apt-get install -y python3.7 python3-pip
+USER coder
+
+RUN python3.7 -m pip install -U pipenv --user
 
 RUN code-server --install-extension ms-python.python 
-RUN code-server --install-extension yzhang.markdown-all-in-one 
 RUN code-server --install-extension zhuangtongfa.Material-theme 
+ENV PATH="/home/coder/.local/bin:${PATH}"
 
-COPY ./settings.json /home/coder/.local/share/code-server/User
+RUN mkdir -p /home/coder/.local/share/virtualenvs 
+WORKDIR /home/coder/.local/share/virtualenvs
+VOLUME [ "/home/coder/.local/share/virtualenvs" ]
 
-ENTRYPOINT ["dumb-init", "code-server", "--cert=/home/coder/vs_code_server.crt", \
-"--cert-key=/home/coder/vs_code_server.key", "--disable-telemetry", "--no-auth"]
+WORKDIR /home/coder/project
+COPY --chown=coder ./settings.json /home/coder/.local/share/code-server/User
+
+ENTRYPOINT ["dumb-init", "code-server", "--disable-telemetry", "--no-auth",  "--allow-http"]
